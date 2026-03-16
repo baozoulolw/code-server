@@ -38,4 +38,22 @@ export class CodeCompletionController {
 
     return completionRes;
   }
+  @Post('qwen')
+  async qwenCompletion(
+    @Body() body,
+  ): ReturnType<CompletionCopilot['complete']> {
+    const completionRes = await aiUtils.getCopliot('qwen').complete({ body });
+
+    return completionRes;
+  }
+  @Post('kimi25')
+  async KimiCompletion(
+    @Body() body,
+  ): ReturnType<CompletionCopilot['complete']> {
+    const completionRes = await aiUtils
+      .getCopliot('kimi_2_5')
+      .complete({ body });
+
+    return completionRes;
+  }
 }

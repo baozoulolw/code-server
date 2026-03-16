@@ -40,8 +40,43 @@ const modelConfig = {
       return { text: completion.choices[0].message.content };
     },
   },
+  qwen: {
+    name: 'qwen',
+    url: 'http://124.223.25.122:3003/openai-qwen-oauth/v1',
+    apiKey: 'w123456789',
+    model: async (prompt: any, openAi: OpenAI) => {
+      const completion = await openAi.chat.completions.create({
+        messages: [
+          { role: 'system', content: prompt.context },
+          {
+            role: 'user',
+            content: `${prompt.instruction}\n\n${prompt.fileContent}`,
+          },
+        ],
+        model: 'qwen3-coder-plus',
+      });
+      return { text: completion.choices[0].message.content };
+    },
+  },
+  kimi_2_5: {
+    name: 'kimi_2_5',
+    url: 'http://172.16.4.197:8002/v1',
+    apiKey: 'sk-MTc3MzYyNDI1NDUzMx2ocCahvu34aSd0V5XoeEBt1Jk7cdH-5DESx_0VKI_w',
+    model: async (prompt: any, openAi: OpenAI) => {
+      const completion = await openAi.chat.completions.create({
+        messages: [
+          { role: 'system', content: prompt.context },
+          {
+            role: 'user',
+            content: `${prompt.instruction}\n\n${prompt.fileContent}`,
+          },
+        ],
+        model: 'kimi-k2.5',
+      });
+      return { text: completion.choices[0].message.content };
+    },
+  },
 };
-
 const defaultModels = {
   mistral: {
     apiKey: 'IY8Uhy5SS3Yk0Kq2ERCyXXlAoZNOWnda',
